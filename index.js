@@ -1,8 +1,6 @@
-function Terminal(){}
-Terminal.prototype.xhr = new XMLHttpRequest();
-ter = new Terminal();
 export default function ajaxS(url, request = null, responseBack = null, method = 'POST')
 {
+    let xhr = new XMLHttpRequest();
     if (responseBack === null || responseBack === ''){
         responseBack = function (response){
             console.log(response);
@@ -34,7 +32,6 @@ export default function ajaxS(url, request = null, responseBack = null, method =
 
     function sendRequest(url, request)
     {
-        let xhr = ter.xhr;
         xhr.onreadystatechange = setGo;
         xhr.open(method, url, true);
         reqHeader(xhr);
@@ -42,8 +39,8 @@ export default function ajaxS(url, request = null, responseBack = null, method =
     }
     function setGo()
     {
-        if (ter.xhr.readyState === 4 && ter.xhr.status === 200) {
-            let response = ter.xhr.responseText;
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            let response = xhr.responseText;
             responseBack(response);
         }
         else {
